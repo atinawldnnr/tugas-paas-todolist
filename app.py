@@ -177,7 +177,8 @@ def health():
 
 @app.route('/mahasiswa')
 def mahasiswa():
-    return [
+
+    mahasiswa_data = [
         {
             "nama": "Andi",
             "nim": "120123"
@@ -185,8 +186,113 @@ def mahasiswa():
         {
             "nama": "Budi",
             "nim": "120124"
+        },
+        {
+            "nama": "Citra",
+            "nim": "120125"
         }
     ]
+
+    rows = ""
+
+    for i, mhs in enumerate(mahasiswa_data, start=1):
+        rows += f"""
+        <tr>
+            <td>{i}</td>
+            <td>{mhs['nama']}</td>
+            <td>{mhs['nim']}</td>
+        </tr>
+        """
+
+    return f"""
+    <!DOCTYPE html>
+    <html lang="id">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Data Mahasiswa</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+
+            body {{
+                background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+                min-height: 100vh;
+                color: white;
+                font-family: Arial;
+            }}
+
+            .container-box {{
+                margin-top: 80px;
+                background: rgba(255,255,255,0.08);
+                padding: 40px;
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                animation: fadeIn 1s ease;
+            }}
+
+            @keyframes fadeIn {{
+                from {{
+                    opacity: 0;
+                    transform: translateY(20px);
+                }}
+
+                to {{
+                    opacity: 1;
+                    transform: translateY(0);
+                }}
+            }}
+
+            .btn-home {{
+                margin-top: 20px;
+            }}
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="container-box">
+
+                <h1 class="text-center mb-4">
+                    👨‍🎓 Data Mahasiswa
+                </h1>
+
+                <table class="table table-dark table-hover table-striped">
+
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>NIM</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {rows}
+                    </tbody>
+
+                </table>
+
+                <div class="text-center">
+                    <a href="/" class="btn btn-primary btn-home">
+                        ⬅ Kembali ke Dashboard
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+    </html>
+    """
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
