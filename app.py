@@ -3,33 +3,30 @@ import os
 
 app = Flask(__name__)
 
-# Endpoint 1
 @app.route('/')
-def beranda():
+def home():
     return jsonify({
-        'pesan': 'Aplikasi Kehadiran Mahasiswa',
-        'status': 'aktif',
-        'versi': '1.0.0'
+        "pesan": "Aplikasi Kehadiran Mahasiswa",
+        "status": "aktif",
+        "versi": "1.0.0"
     })
 
-# Endpoint 2
-@app.route('/kesehatan')
-def cek_kesehatan():
+@app.route('/health')
+def health():
     return jsonify({
-        'status': 'sehat'
+        "status": "sehat"
     })
 
-# Endpoint 3
 @app.route('/mahasiswa')
 def mahasiswa():
     data = [
         {
-            "nama": "Budi",
-            "nim": "1301220001"
+            "nama": "Andi",
+            "nim": "120123"
         },
         {
-            "nama": "Siti",
-            "nim": "1301220002"
+            "nama": "Budi",
+            "nim": "120124"
         }
     ]
 
