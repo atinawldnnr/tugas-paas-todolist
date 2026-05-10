@@ -3,12 +3,15 @@ import os
 
 app = Flask(__name__)
 
+env = os.getenv("APP_ENV", "development")
+
 @app.route('/')
 def home():
     return jsonify({
-        "pesan": "Aplikasi Kehadiran Mahasiswa",
-        "status": "aktif",
-        "versi": "1.0.0"
+    "pesan": "Aplikasi Kehadiran Mahasiswa",
+    "status": "aktif",
+    "versi": "1.0.0",
+    "environment": env
     })
 
 @app.route('/health')
